@@ -1,0 +1,48 @@
+{
+  "name": "pccu-life-widget",
+  "version": "0.0.0",
+  "main": "main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "electron:serve": "electron .",
+    "pack": "electron-builder --dir",
+    "pack-dist": "electron-builder"
+  },
+  "dependencies": {
+    "vue": "3.1.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.2.3",
+    "@vue/compiler-sfc": "3.1.5",
+    "axios": "^0.25.0",
+    "electron": "^16.0.1",
+    "electron-builder": "^22.14.13",
+    "vitawind": "^2.0.0",
+    "vite": "^2.4.4"
+  },
+  "build": {
+    "appId": "huibizhang.com",
+    "productName": "pccu-life-widget",
+    "directories": {
+      "output": "pack"
+    },
+    "files": [
+      "dist/",
+      "assets/",
+      "main.js",
+      "preload.js"
+    ],
+    "asar": false,
+    "win": {
+      "icon": "assets/icon.png"
+    },
+    "mac": {
+      "icon": "assets/icon.png"
+    },
+    "linux": {
+      "icon": "assets/icon.png"
+    }
+  }
+}
