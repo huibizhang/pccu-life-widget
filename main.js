@@ -37,7 +37,7 @@ function createWindow() {
 
   // 加載 index.html
   // mainWindow.loadFile("./dist/index.html"); // 此處跟electron官網路徑不同，需要註意
-  mainWindow.loadURL("http://localhost:3001");
+  mainWindow.loadURL("https://pccu-life-widget.vercel.app/");
 
   // 打開開發工具
   // mainWindow.webContents.openDevTools()
