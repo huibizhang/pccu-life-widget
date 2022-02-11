@@ -1,6 +1,36 @@
 <template>
-  <div class="flex flex-col max-w-[350px]">
-    <div class="w-full flex justify-end items-center">
+  <div class="flex flex-col max-w-[350px] select-none">
+    <div class="w-full flex justify-end items-center space-x-1">
+      <div
+        class="w-10 h-7 flex justify-center items-center text-gray-500 px-2 font-black font-mono text-lg"
+        @click="
+          is12 = !is12;
+          save();
+        "
+      >
+        <div :class="['transition-all', is12 && 'text-white']">1</div>
+        <div class="text-white">2</div>
+        <div :class="['transition-all', !is12 && 'text-white']">4</div>
+      </div>
+      <div
+        class="w-7 h-7 flex justify-center items-center text-gray-500"
+        @click="refresh()"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+          />
+        </svg>
+      </div>
       <div
         class="titlebar w-7 h-7 flex justify-center items-center text-gray-500 cursor-move"
       >
@@ -17,7 +47,7 @@
       </div>
     </div>
     <div class="flex flex-col gap-3">
-      <Clock />
+      <Clock :is12="is12" />
       <WeatherCard
         v-for="w in weather.filter((w) => w.full)"
         :key="w.Location"
@@ -36,9 +66,14 @@ export default {
   data() {
     return {
       weather: [],
+      is12: true,
     };
   },
   mounted() {
+    this.is12 = window.localStorage.getItem("is12")
+      ? window.localStorage.getItem("is12") === "true"
+      : true;
+
     this.weatherTimer();
   },
   methods: {
@@ -51,10 +86,19 @@ export default {
         _me.weather = response.data;
         _me.weather.forEach((e, index) => {
           e["full"] = index === 0;
+          if (e["WeatherDesciption"] == -99) {
+            e["WeatherDesciption"] = "陰";
+          }
         });
         console.log(_me.weather);
       });
       setTimeout(this.weatherTimer, 45000);
+    },
+    refresh() {
+      window.location = "";
+    },
+    save() {
+      window.localStorage.setItem("is12", this.is12);
     },
   },
   components: {

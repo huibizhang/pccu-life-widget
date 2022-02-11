@@ -1,5 +1,7 @@
 // main.js
 
+const fs = require("fs");
+
 // 控制應用生命周期和創建原生瀏覽器窗口的模組
 const { app, BrowserWindow, screen } = require("electron");
 const path = require("path");
@@ -22,11 +24,31 @@ function createWindow() {
     //   symbolColor: 'white'
     // }
   });
+  var initPath = path.join(app.getAppPath(), "setting.json");
+  var data;
+  try {
+    data = JSON.parse(fs.readFileSync(initPath, "utf8"));
+  } catch (e) {
+    const primaryDisplay = screen.getPrimaryDisplay();
+    const { width, height } = primaryDisplay.workAreaSize;
+    data = {
+      position: {
+        x: width - mainWindow.getSize()[0] - 5,
+        y: 5,
+      },
+    };
+    fs.writeFileSync(initPath, JSON.stringify(data));
+  }
 
   // Create a window that fills the screen's available work area.
-  const primaryDisplay = screen.getPrimaryDisplay();
-  const { width, height } = primaryDisplay.workAreaSize;
-  mainWindow.setPosition(width - mainWindow.getSize()[0] - 5, 5, false);
+
+  mainWindow.setPosition(data.position.x, data.position.y, true);
+
+  mainWindow.on("moved", () => {
+    data.position.x = mainWindow.getPosition()[0];
+    data.position.y = mainWindow.getPosition()[1];
+    fs.writeFileSync(initPath, JSON.stringify(data));
+  });
 
   // Require the module
   // var electronVibrancy = require('electron-vibrancy');
@@ -38,6 +60,7 @@ function createWindow() {
   // 加載 index.html
   // mainWindow.loadFile("./dist/index.html"); // 此處跟electron官網路徑不同，需要註意
   mainWindow.loadURL("https://pccu-life-widget.vercel.app/");
+  // mainWindow.loadURL("http://127.0.0.1:3000");
 
   // 打開開發工具
   // mainWindow.webContents.openDevTools()

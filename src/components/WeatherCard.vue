@@ -49,7 +49,10 @@
       </div>
       <div
         class="absolute w-7 h-7 top-2 right-2 rounded-full bg-white flex justify-center items-center text-gray-400"
-        @click="open = !open"
+        @click="
+          open = !open;
+          save();
+        "
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +78,7 @@
       </div>
       <div class="flex flex-col gap-1 justify-center items-center">
         <span class="text-orange-400 font-bold">更新時間</span>
-        <span class="text-white">{{ timeago(new Date(UpdateTime)) }}</span>
+        <span class="text-white">{{ timestamp }}</span>
       </div>
     </div>
   </div>
@@ -99,9 +102,16 @@ export default {
   data() {
     return {
       open: false,
+      timestamp: "",
     };
   },
-  mounted() {},
+  mounted() {
+    this.open = window.localStorage.getItem("open")
+      ? window.localStorage.getItem("open") === "true"
+      : false;
+
+    this.timestampTimer();
+  },
   methods: {
     timeago(dateTimeStamp) {
       //dateTimeStamp是一個時間毫秒，註意時間戳是秒的形式，在這個毫秒的基礎上除以1000，就是十位數的時間戳。13位數的都是時間毫秒。
@@ -210,6 +220,13 @@ export default {
       }
 
       return "cloudy";
+    },
+    timestampTimer() {
+      this.timestamp = this.timeago(new Date(this.UpdateTime));
+      setTimeout(this.timestampTimer, 3000);
+    },
+    save() {
+      window.localStorage.setItem("open", this.open);
     },
   },
 };
