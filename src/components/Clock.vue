@@ -1,14 +1,19 @@
 <template>
   <div
-    class="max-w-[350px] p-3 bg-gray-700 text-white font-bold rounded-lg flex justify-center items-center gap-6 select-none"
+    class="max-w-[350px] bg-gray-700 text-white font-bold rounded-lg select-none flex flex-col"
   >
-    <div class="h-full text-gray-500" v-if="is12">
-      <div :class="[am && 'text-white']">上午</div>
-      <div :class="[!am && 'text-white']">下午</div>
+    <div class="flex justify-center items-center gap-6 p-3">
+      <div class="h-full text-gray-500" v-if="is12">
+        <div :class="[am && 'text-white']">上午</div>
+        <div :class="[!am && 'text-white']">下午</div>
+      </div>
+      <div class="flex gap-3 items-end">
+        <div class="text-5xl">{{ `${hh}:${mm}` }}</div>
+        <div class="text-2xl text-gray-400">{{ ss }}</div>
+      </div>
     </div>
-    <div class="flex gap-3 items-end">
-      <div class="text-5xl">{{ `${hh}:${mm}` }}</div>
-      <div class="text-2xl text-gray-400">{{ ss }}</div>
+    <div class="p-2 text-center border-t border-gray-800 text-gray-300 text-lg">
+      {{ `${yy} 年 ${MM} 月 ${dd} 日` }}
     </div>
   </div>
 </template>
@@ -40,6 +45,10 @@ export default {
       );
       this.mm = this.prefix(this.time.getMinutes());
       this.ss = this.prefix(this.time.getSeconds());
+
+      this.yy = this.time.getFullYear();
+      this.MM = this.time.getMonth() + 1;
+      this.dd = this.time.getDate();
 
       setTimeout(this.timer, 800);
     },
