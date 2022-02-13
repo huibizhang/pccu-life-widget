@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="p-2 text-center border-t border-gray-800 text-gray-300 text-lg">
-      {{ `${yy} 年 ${MM} 月 ${dd} 日` }}
+      {{ `${yy} 年 ${MM} 月 ${dd} 日 (週${week})` }}
     </div>
   </div>
 </template>
@@ -29,6 +29,7 @@ export default {
       yy: "",
       MM: "",
       dd: "",
+      week: "",
       am: true,
       time: new Date(),
     };
@@ -49,6 +50,16 @@ export default {
       this.yy = this.time.getFullYear();
       this.MM = this.time.getMonth() + 1;
       this.dd = this.time.getDate();
+
+      this.week = [
+        "日",
+        "一",
+        "二",
+        "三",
+        "四",
+        "五",
+        "六",
+      ][this.time.getDay()];
 
       setTimeout(this.timer, 800);
     },
