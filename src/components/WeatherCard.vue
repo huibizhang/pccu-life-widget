@@ -33,7 +33,7 @@
           </div>
         </div>
       </div>
-      <div class="flex justify-between px-8 pb-3">
+      <div class="flex justify-between px-4 pb-3 xs:px-8">
         <div class="flex flex-col gap-0.5 justify-center items-center">
           <span class="text-emerald-800 font-bold">相對<br class="xs:hidden block" />溼度</span>
           <span class="text-white xs:text-2xl text-xl font-bold">{{ Humidity }}%</span>
