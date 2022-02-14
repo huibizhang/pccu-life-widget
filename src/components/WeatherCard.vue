@@ -35,16 +35,16 @@
       </div>
       <div class="flex justify-between px-8 pb-3">
         <div class="flex flex-col gap-0.5 justify-center items-center">
-          <span class="text-emerald-800 font-bold">相對溼度</span>
-          <span class="text-white text-2xl font-bold">{{ Humidity }}%</span>
+          <span class="text-emerald-800 font-bold">相對<br class="xs:hidden block" />溼度</span>
+          <span class="text-white xs:text-2xl text-xl font-bold">{{ Humidity }}%</span>
         </div>
         <div class="flex flex-col gap-0.5 justify-center items-center">
-          <span class="text-emerald-800 font-bold">現在風速</span>
-          <span class="text-white text-2xl font-bold">{{ WindSpeed }}m/s</span>
+          <span class="text-emerald-800 font-bold">現在<br class="xs:hidden block" />風速</span>
+          <span class="text-white xs:text-2xl text-xl font-bold">{{ WindSpeed }}m/s</span>
         </div>
         <div class="flex flex-col gap-0.5 justify-center items-center">
-          <span class="text-emerald-800 font-bold">累積雨量</span>
-          <span class="text-white text-2xl font-bold">{{ RainFall }}mm</span>
+          <span class="text-emerald-800 font-bold">累積<br class="block xs:hidden" />雨量</span>
+          <span class="text-white xs:text-2xl text-xl font-bold">{{ RainFall }}mm</span>
         </div>
       </div>
       <div
