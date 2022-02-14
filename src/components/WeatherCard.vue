@@ -2,7 +2,7 @@
   <div
     :class="[
       'bg-emerald-500 flex-none text-lg max-w-[350px] select-none rounded-lg transition-all overflow-hidden',
-      open ? 'max-h-full' : 'max-h-[112px]',
+      open ? 'max-h-[500px]' : 'max-h-[112px]',
     ]"
   >
     <div class="relative">
