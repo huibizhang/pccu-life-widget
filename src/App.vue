@@ -88,7 +88,7 @@ export default {
 
     this.openCalendar = window.localStorage.getItem("openCalendar")
       ? window.localStorage.getItem("openCalendar") === "true"
-      : true;
+      : false;
 
     this.weatherTimer();
   },
