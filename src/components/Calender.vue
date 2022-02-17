@@ -3,7 +3,7 @@
     class="max-w-[350px] bg-orange-600 text-white font-bold rounded-lg select-none flex flex-col space-y-3 items-center p-3"
   >
     <div>
-      {{`星旗${week}`}}
+      {{`星期${week}`}}
     </div>
     <div class="text-5xl font-black">
       {{dd}}
@@ -46,7 +46,7 @@ export default {
           "十",
           "十一",
           "十二",
-      ].this.time.getMonth();
+      ][this.time.getMonth()];
       this.dd = this.time.getDate();
 
       this.week = [
