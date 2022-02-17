@@ -4,11 +4,11 @@
       <div
         class="w-10 h-7 flex justify-center items-center text-gray-500 px-2 font-black font-mono text-lg"
         @click="
-          is12 = !is12;
+          openCalendar = !openCalendar;
           save();
         "
       >
-        <div class="">7</div>
+        <div class="w-7 h-7 bg-gray-500 flex justify-center items-center">7</div>
       </div>
       <div
         class="w-10 h-7 flex justify-center items-center text-gray-500 px-2 font-black font-mono text-lg"
