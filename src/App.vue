@@ -8,7 +8,9 @@
           save();
         "
       >
-        <div class="w-7 h-7 bg-gray-500 flex justify-center items-center">7</div>
+        <div class="w-5 h-5 bg-gray-500 flex justify-center items-center text-white rounded text-sm font-bold">
+          7
+        </div>
       </div>
       <div
         class="w-10 h-7 flex justify-center items-center text-gray-500 px-2 font-black font-mono text-lg"
