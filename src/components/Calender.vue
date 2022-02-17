@@ -9,7 +9,7 @@
       {{ dd }}
     </div>
     <div>
-      {{ `${yy} 年 ${MM} 月` }}
+      {{ `${yy} ${MM}月` }}
     </div>
   </div>
 </template>
