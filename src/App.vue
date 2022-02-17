@@ -8,6 +8,15 @@
           save();
         "
       >
+        <div class="">7</div>
+      </div>
+      <div
+        class="w-10 h-7 flex justify-center items-center text-gray-500 px-2 font-black font-mono text-lg"
+        @click="
+          is12 = !is12;
+          save();
+        "
+      >
         <div :class="['transition-all', is12 && 'text-white']">1</div>
         <div class="text-white">2</div>
         <div :class="['transition-all', !is12 && 'text-white']">4</div>
@@ -47,7 +56,8 @@
       </div>
     </div>
     <div class="flex flex-col gap-3">
-      <Clock :is12="is12" />
+      <Clock :is12="is12" :openCalendar="openCalendar" />
+      <Calender :openCalendar="openCalendar" />
       <WeatherCard
         v-for="w in weather.filter((w) => w.full)"
         :key="w.Location"
@@ -67,6 +77,7 @@ export default {
     return {
       weather: [],
       is12: true,
+      openCalendar: false,
     };
   },
   mounted() {

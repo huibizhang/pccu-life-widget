@@ -12,7 +12,10 @@
         <div class="text-2xl text-gray-400">{{ ss }}</div>
       </div>
     </div>
-    <div class="p-2 text-center border-t border-gray-800 text-gray-300 text-lg">
+    <div
+      class="p-2 text-center border-t border-gray-800 text-gray-300 text-lg"
+      :class="!openCalendar && "hidden"
+    >
       {{ `${yy} 年 ${MM} 月 ${dd} 日 (週${week})` }}
     </div>
   </div>
@@ -20,7 +23,7 @@
 
 <script>
 export default {
-  props: ["is12"],
+  props: ["is12","openCalendar"],
   data() {
     return {
       hh: "",
