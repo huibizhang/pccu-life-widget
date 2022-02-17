@@ -1,36 +1,27 @@
 <template>
   <div
-    class="max-w-[350px] bg-orange-700 text-white font-bold rounded-lg select-none flex flex-col"
+    class="max-w-[350px] bg-orange-600 text-white font-bold rounded-lg select-none flex flex-col space-y-3 items-center p-3"
   >
-    <div class="flex justify-center items-center gap-6 p-3">
-      <div class="h-full text-gray-500" v-if="is12">
-        <div :class="[am && 'text-white']">上午</div>
-        <div :class="[!am && 'text-white']">下午</div>
-      </div>
-      <div class="flex gap-3 items-end">
-        <div class="text-5xl">{{ `${hh}:${mm}` }}</div>
-        <div class="text-2xl text-gray-400">{{ ss }}</div>
-      </div>
+    <div>
+      {{`星旗${week}`}}
     </div>
-    <div
-      class="p-2 text-center border-t border-gray-800 text-gray-300 text-lg"
-      :class="!openCalendar && "hidden"
-    >
-      {{ `${yy} 年 ${MM} 月 ${dd} 日 (週${week})` }}
+    <div class="text-5xl font-black">
+      {{dd}}
+    </div>
+    <div>
+      {{ `${yy} 年 ${MM} 月` }}
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["is12","openCalendar"],
   data() {
     return {
       yy: "",
       MM: "",
       dd: "",
       week: "",
-      am: true,
       time: new Date(),
     };
   },

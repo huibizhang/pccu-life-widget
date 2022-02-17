@@ -57,7 +57,7 @@
     </div>
     <div class="flex flex-col gap-3">
       <Clock :is12="is12" :openCalendar="openCalendar" />
-      <Calender :openCalendar="openCalendar" />
+      <Calender v-if="openCalendar" />
       <WeatherCard
         v-for="w in weather.filter((w) => w.full)"
         :key="w.Location"
@@ -71,6 +71,7 @@
 import axios from "axios";
 import WeatherCard from "./components/WeatherCard.vue";
 import Clock from "./components/Clock.vue";
+import Calender from "./components/Calender.vue";
 
 export default {
   data() {
@@ -83,6 +84,10 @@ export default {
   mounted() {
     this.is12 = window.localStorage.getItem("is12")
       ? window.localStorage.getItem("is12") === "true"
+      : true;
+
+    this.openCalendar = window.localStorage.getItem("openCalendar")
+      ? window.localStorage.getItem("openCalendar") === "true"
       : true;
 
     this.weatherTimer();
@@ -110,11 +115,13 @@ export default {
     },
     save() {
       window.localStorage.setItem("is12", this.is12);
+      window.localStorage.setItem("openCalendar", this.openCalendar);
     },
   },
   components: {
     WeatherCard,
     Clock,
+    Calender,
   },
 };
 </script>
