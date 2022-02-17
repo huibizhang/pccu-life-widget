@@ -14,7 +14,7 @@
     </div>
     <div
       class="p-2 text-center border-t border-gray-800 text-gray-300 text-lg"
-      :class="!openCalendar && 'hidden'"
+      :class="openCalendar && 'hidden'"
     >
       {{ `${yy} 年 ${MM} 月 ${dd} 日 (週${week})` }}
     </div>
