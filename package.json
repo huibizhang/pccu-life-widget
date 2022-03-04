@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "main": "main.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "cross-env NODE_ENV=dev vite",
+    "build": "cross-env NODE_ENV=production vite build",
     "serve": "vite preview",
-    "electron:serve": "electron .",
+    "electron:serve": "cross-env NODE_ENV=dev electron .",
     "pack": "electron-builder --dir",
     "pack-dist": "electron-builder"
   },
@@ -17,6 +17,7 @@
     "@vitejs/plugin-vue": "^1.2.3",
     "@vue/compiler-sfc": "3.1.5",
     "axios": "^0.25.0",
+    "cross-env": "^7.0.3",
     "electron": "^16.0.1",
     "electron-builder": "^22.14.13",
     "vitawind": "^2.0.0",

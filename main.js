@@ -14,6 +14,10 @@ function createWindow() {
     frame: false,
     skipTaskbar: true,
     transparent: true,
+    
+    // resizable: false,
+    maximizable: false,
+    
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       experimentalFeatures: true,
@@ -24,13 +28,15 @@ function createWindow() {
     //   symbolColor: 'white'
     // }
   });
+
+  const primaryDisplay = screen.getPrimaryDisplay();
+  const { width, height } = primaryDisplay.workAreaSize;
+  
   var initPath = path.join(app.getAppPath(), "setting.json");
   var data;
   try {
     data = JSON.parse(fs.readFileSync(initPath, "utf8"));
   } catch (e) {
-    const primaryDisplay = screen.getPrimaryDisplay();
-    const { width, height } = primaryDisplay.workAreaSize;
     data = {
       position: {
         x: width - mainWindow.getSize()[0] - 5,
@@ -41,12 +47,27 @@ function createWindow() {
   }
 
   // Create a window that fills the screen's available work area.
-
-  mainWindow.setPosition(data.position.x, data.position.y, true);
+  
+  mainWindow.setPosition(
+    (data.position.x + mainWindow.getSize()[0] > width)? width - mainWindow.getSize()[0] - 5 :  data.position.x,
+    (data.position.y < 0) ? 0 : data.position.y,
+    true
+  );
 
   mainWindow.on("moved", () => {
     data.position.x = mainWindow.getPosition()[0];
     data.position.y = mainWindow.getPosition()[1];
+
+    if(data.position.x + mainWindow.getSize()[0] > width){
+      data.position.x = width - mainWindow.getSize()[0] - 5
+    }
+
+    if(data.position.y < 0) {
+      data.position.y = 5
+    }
+
+    mainWindow.setPosition(data.position.x, data.position.y , true)
+
     fs.writeFileSync(initPath, JSON.stringify(data));
   });
 
@@ -57,10 +78,13 @@ function createWindow() {
   // mainWindow.setAlwaysOnTop(true)
   // mainWindow.setSkipTaskbar(true)
 
-  // 加載 index.html
-  // mainWindow.loadFile("./dist/index.html"); // 此處跟electron官網路徑不同，需要註意
-  mainWindow.loadURL("https://pccu-life-widget.vercel.app/");
-  // mainWindow.loadURL("http://127.0.0.1:3000");
+  if(process.env.NODE_ENV === "production"){
+    // mainWindow.loadURL("https://pccu-life-widget.vercel.app/");
+    mainWindow.loadURL("http://127.0.0.1:3000");
+  } else {
+    // 加載 index.html
+    mainWindow.loadFile("./dist/index.html"); // 此處跟electron官網路徑不同，需要註意
+  }
 
   // 打開開發工具
   // mainWindow.webContents.openDevTools()
