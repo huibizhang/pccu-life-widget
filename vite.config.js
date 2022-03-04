@@ -2,8 +2,6 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 
-console.log(process.env.NODE_ENV)
-
 const getConfig = () => {
   return (
     process.env.NODE_ENV === "production"

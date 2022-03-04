@@ -78,7 +78,7 @@ function createWindow() {
   // mainWindow.setAlwaysOnTop(true)
   // mainWindow.setSkipTaskbar(true)
 
-  if(process.env.NODE_ENV === "production"){
+  if(process.env.NODE_ENV === "dev"){
     // mainWindow.loadURL("https://pccu-life-widget.vercel.app/");
     mainWindow.loadURL("http://127.0.0.1:3000");
   } else {
